@@ -11,3 +11,6 @@ functions
 and visualize biological/environmental data
 * Evaluate potential pinch points for integration of R in your
 classroom and discuss strategies to work through them
+
+## Previous uses:
+These materials were initially developed by Kait Farrell (@farrellkj) for a March 2024 BEDE Network workshop at the University of Puget Sound. 
