@@ -49,7 +49,7 @@ library(here)
 
 One of the most basic things you will need to do in R is read in data sets, which may be imported from Excel files, text files, and more. The easiest type of file to read in to R is a comma separated values (CSV) file. You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the "Save as ..." menu item.
 
-Let's read in a small mammal dataset collected by the National Ecological Observatory Network (NEON). We'll use the function `read_csv()`. This will import the dataset as a `tibble`, which is like a dataframe but "lazy and surly"; they "do less and complain more". For example, a tibble will not change variable names during import or change variable types, which can sometimes happen when importing a dataframe using `base R`.
+Let's read in a small mammal data set collected by the National Ecological Observatory Network (NEON). We'll use the function `read_csv()`. This will import the data set as a `tibble`, which is like a dataframe but "lazy and surly"; they "do less and complain more". For example, a tibble will not change variable names during import or change variable types, which can sometimes happen when importing a dataframe using `base R`.
 
 We'll also embed a structure from the `here` package to specify the file location within our working directory. This is important because sometimes .Rmd files can get grumpy if they are in a different subfolder than the data files we are trying to read or write.
 
@@ -61,33 +61,33 @@ mammals <- read_csv(here("data", "NEON_small_mammals.csv"))
 
 ```
 
-After importing a dataset, we want to take a quick look at the data. There are a number of ways we can do this!
+After importing a data set, we want to take a quick look at the data. There are a number of ways we can do this!
 
 ```{r Preview data}
 
-# Print the first 6 rows of the dataset to the console
+# Print the first 6 rows of the data set to the console
 head(mammals)
 
-# Get a "glimpse" of the dataset, including the value types of each variable
+# Get a "glimpse" of the data set, including the value types of each variable
 glimpse(mammals)
 
-# Print the structure of the dataset 
+# Print the structure of the data set 
 str(mammals)
 
-# To open the dataset in a new window, use view()
+# To open the data set in a new window, use view()
 view(mammals)
 
 ```
 
 We may also want to get a quick overview of the mean and variability of our variables. We can use a `summary()` function to return many of the "standard" summary statistics.
 
-```{r Summarize dataset}
+```{r Summarize data set}
 
 summary(mammals)
 
 ```
 
-Finally, we might want to examine specific columns; for example, to see how many unique sites or unique species the dataset includes.
+Finally, we might want to examine specific columns; for example, to see how many unique sites or unique species the data set includes.
 
 ```{r Print unique values}
 
@@ -97,7 +97,7 @@ unique(mammals$taxonID)
 
 ```
 
-Based on these early looks that there is a lot going on in this dataset! We have 63 different variable columns and over 7000 unique observations (rows) collected across 21 different taxa from two distinct sites. Often, when starting with raw datasets, we want to apply a number of `wrangling` functions to clean things up and focus our analysis or visualization.
+Based on these early looks that there is a lot going on in this data set! We have 63 different variable columns and over 7000 unique observations (rows) collected across 21 different taxa from two distinct sites. Often, when starting with raw data sets, we want to apply a number of `wrangling` functions to clean things up and focus our analysis or visualization.
 
 This is where functions from within the `dplyr` function (part of the `tidyverse`) come in handy!
 
@@ -112,12 +112,12 @@ Some of the core functions of `dplyr` that we use for data wrangling are:
 -   **mutate():** create new columns by using information from other columns
 -   **rename():** change names of existing columns
 -   **count():** count discrete values
--   **group_by()** and **summarize():** calculate summary statistics for grouped data
+-   **group_by()** and **summarize():** calculate summary statistics for grouped data
 -   **arrange():** sort results
 
 ### Selecting columns and filtering rows
 
-We can select specific *columns* from our dataset to retain (or remove) using `select()` commands. When used on its own, the select command requires that we first name the data object we're selecting from within, then indicate the focal columns.
+We can select specific *columns* from our data set to retain (or remove) using `select()` commands. When used on its own, the select command requires that we first name the data object we're selecting from within, then indicate the focal columns.
 
 ```{r dplyr select()}
 
@@ -139,7 +139,7 @@ head(anti_select)
 
 ```
 
-Similarly, we can use a `filter()` to retain (or remove) *rows* from our dataset based on criteria we specify.
+Similarly, we can use a `filter()` to retain (or remove) *rows* from our data set based on criteria we specify.
 
 ```{r dplyr filter()}
 
@@ -345,7 +345,7 @@ ggplot(data = plot_mamm,
 
 While your data plotted, you probably got a warning to the effect of "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
 
-This means that there is a mismatch between how many "bins" along the x-axis you are setting up, relative to the size of the dataset.
+This means that there is a mismatch between how many "bins" along the x-axis you are setting up, relative to the size of the data set.
 
 ### Challenge - Enter a Help command in the Console (e.g., `?geom_histogram`) to determine how to change the number of bins used in our plot
 
@@ -358,11 +358,11 @@ ggplot(data = plot_mamm,
 
 ```
 
-You may also have noticed another warning: "Removed 2 rows containing non-finite values (`stat_bin()`)." This is just R giving you a heads-up that two observations in your dataset were missing values for the requested x-axis variable (in this case, bill length), so those observations were not plotted.
+You may also have noticed another warning: "Removed 2 rows containing non-finite values (`stat_bin()`)." This is just R giving you a heads-up that two observations in your data set were missing values for the requested x-axis variable (in this case, bill length), so those observations were not plotted.
 
-It is important when making your own figures (& training your students!), that you investigate whether this type of warning is driven by NA values in your dataset (no problem) *or* if you have manually set axis limits that are excluding data points (adjust your axes to encompass your observations!).
+It is important when making your own figures (& training your students!), that you investigate whether this type of warning is driven by NA values in your data set (no problem) *or* if you have manually set axis limits that are excluding data points (adjust your axes to encompass your observations!).
 
-Now that the bin number is a better fit to our dataset, we can add additional aesthetics and ggplot layers to customize our plot and the story it is telling.
+Now that the bin number is a better fit to our data set, we can add additional aesthetics and ggplot layers to customize our plot and the story it is telling.
 
 For example, we can include a `labs()` command to customize our x- and y-axis labels, & add a built-in theme command to adjust the non-data aesthetics of our figure.
 
@@ -396,7 +396,7 @@ ggplot(data = plot_mamm,
 
 ```
 
-Finally, we should adjust the y-axis so that allour data are encompassed within the axis limits.
+Finally, we should adjust the y-axis so that all our data are encompassed within the axis limits.
 
 ```{r}
 
@@ -450,9 +450,9 @@ ggplot(data = plot_mamm,
 
 ```
 
-While boxplots pack in a lot of information, it can still be useful to include a visualization of the full dataset. We can use an additional geom, like `geom_jitter()` to include the raw data points.
+While boxplots pack in a lot of information, it can still be useful to include a visualization of the full data set. We can use an additional geom, like `geom_jitter()` to include the raw data points.
 
-We'll include this geom *before* our `geom_boxplot()` call so that the points appear *behind* the boxplots (layers are added to our ggplot in the order they are written). Note that we'll now specify `fill = NA` within our `geom_boxplot()` call so that the bo
+We'll include this geom *before* our `geom_boxplot()` call so that the points appear *behind* the boxplots (layers are added to our ggplot in the order they are written). Note that we'll now specify `fill = NA` within our `geom_boxplot()` call so that the boxes themselves are transparent, allowing us to see all the jittered points.
 
 ```{r}
 
@@ -530,7 +530,7 @@ Let's take a *super* quick look at how to do some statistical analyses!
 
 ## Linear regression
 
-We use linear regression to quantify the slope of best fit line between two continuous variables and test whether that slope is significantly different from zero. Our regression model will also tell us about how strong a predicive relationship is between our two variables.
+We use linear regression to quantify the slope of best fit line between two continuous variables and test whether that slope is significantly different from zero. Our regression model will also tell us about how strong a predictive relationship is between our two variables.
 
 We use the `lm()` function to set up our linear model. Most model functions take a function argument and a data argument. The function represents the relationship you're testing for between variables and the data takes the name of the data object.
 
